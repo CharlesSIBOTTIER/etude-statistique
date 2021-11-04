@@ -22,7 +22,7 @@ libname etude "C:\Users\Charles\OneDrive - Université de Poitiers\IRIAF\Études
 	%let debut=%eval(&debut.+1);
 %end;
 %put &nb.;
-%concetenation
+%concetenation;
 %mend;
 /*Permet de faire la concaténation et la transposé*/
 %macro concatenation(nombre);
