@@ -2,13 +2,13 @@ library(sqldf)
 library(dplyr)
 
 #Importation des données
-acc <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/ACC.csv",sep=";")
-adu <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/ADU.csv",sep=";")
-enf <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/ENF.csv",sep=";")
-foy <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/FOY.csv",sep=";")
-ind <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/IND.csv",sep=";")
-pa <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/PA.csv",sep=";")
-relier <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/RELINDACC.csv",sep=";")
+acc <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/ACC.csv",sep=";",stringsAsFactors = FALSE)
+adu <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/ADU.csv",sep=";",stringsAsFactors = FALSE)
+enf <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/ENF.csv",sep=";",stringsAsFactors = FALSE)
+foy <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/FOY.csv",sep=";",stringsAsFactors = FALSE)
+ind <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/IND.csv",sep=";",stringsAsFactors = FALSE)
+pa <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/PA.csv",sep=";",stringsAsFactors = FALSE)
+relier <- read.csv2("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données Calyxis/CSV/RELINDACC.csv",sep=";",stringsAsFactors = FALSE)
 
 #Permet d'avoir toutes les infos pour les adultes
 adulteTotal<-sqldf('SELECT *
@@ -20,7 +20,7 @@ adulteTotal<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur les Adultes total
 idx = which(duplicated(names(adulteTotal)))
-adulteTotal = adulteTotal[,-idx]
+adulteTotal <-adulteTotal[,-c(idx,1050,1051)]
 
 #Permet d'avoir toutes les infos pour les enfants
 enfantTotal<-sqldf('SELECT *
@@ -31,7 +31,7 @@ enfantTotal<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur les Enfants total
 idx = which(duplicated(names(enfantTotal)))
-enfantTotal = enfantTotal[,-idx]
+enfantTotal <- enfantTotal[,-c(idx,1050,1051)]
 
 #Permet d'avoir toutes les infos pour les PA
 PATotal<-sqldf('SELECT *
@@ -43,7 +43,7 @@ PATotal<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur les PA total
 idx = which(duplicated(names(PATotal)))
-PATotal = PATotal[,-idx]
+PATotal <- PATotal[,-c(idx,1053,1054)]
 
 #Permet d'avoir les personnes avec des accidents
 accident<-sqldf('SELECT relier.REF_CLE, ind.IND_CLE, relier.ACC_CLE, ind.STR_CLE
@@ -63,7 +63,7 @@ tableAdulteACC<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur la table Accident sur les Adultes
 idx = which(duplicated(names(tableAdulteACC)))
-tableAdulteACC = tableAdulteACC[,-idx]
+tableAdulteACC <- tableAdulteACC[,-c(idx,1477,1478)]
 
 
 #Permet d'avoir les accidents sur les enfants
@@ -76,7 +76,7 @@ tableEnfACC<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur la table Accident sur les Enfants
 idx = which(duplicated(names(tableEnfACC)))
-tableEnfACC = tableEnfACC[,-idx]
+tableEnfACC <- tableEnfACC[,-c(idx,1480,1481)]
 
 
 #Permet d'avoir les accidents sur les personnes âgées
@@ -89,7 +89,7 @@ tablePaACC<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur la table Accident sur les PA
 idx = which(duplicated(names(tablePaACC)))
-tablePaACC = tablePaACC[,-idx]
+tablePaACC <- tablePaACC[,-c(idx,1480,1481)]
 
 
 #Permet d'avoir les Adultes non accidentés
@@ -102,7 +102,7 @@ tableAduNonAcc<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur la table des non Accident sur les Adultes
 idx = which(duplicated(names(tableAduNonAcc)))
-tableAduNonAcc = tableAduNonAcc[,-idx]
+tableAduNonAcc <- tableAduNonAcc[,-c(idx,1477,1478)]
 
 
 #Permet d'avoir les enfants non accidentés
@@ -115,7 +115,7 @@ tableEnfNonAcc<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur la table des non Accident sur les Enfants
 idx = which(duplicated(names(tableEnfNonAcc)))
-tableEnfNonAcc = tableEnfNonAcc[,-idx]
+tableEnfNonAcc <- tableEnfNonAcc[,-c(idx,1480,1481)]
 
 
 #Permet d'avoir les PA non accidentés
@@ -129,17 +129,29 @@ tablePaNonAcc<-sqldf('SELECT *
 
 #Permet de supprimer les colonnes en doublons sur la table des non Accident sur les PA
 idx = which(duplicated(names(tablePaNonAcc)))
-tablePaNonAcc = tablePaNonAcc[,-idx]
+tablePaNonAcc <- tablePaNonAcc[,-c(idx,1480,1481)]
 
+#Permet de faire le retraitement des "NA"
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Tous les Adultes.R")
 source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Adulte ACC.R")
 source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Adulte Non ACC.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Tous les enfants.R")
 source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Enf ACC.R")
 source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Enf Non ACC.R")
 source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement PA ACC.R")
 source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement PA Non ACC.R")
-source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Tous les Adultes ACC.R")
-source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Tous les enfants ACC.R")
-source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Tous les PA ACC.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code retraitement NA/Retraitement Tous les PA.R")
+
+#Permet de faire les regroupements de variables
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement Enfant Total.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement Enfant ACC.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement Enfant Non ACC.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement PA Total.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement PA ACC.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement PA Non ACC.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement Adultes Total.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement Adultes ACC.R")
+source("C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Codes/Code R/Code regroupement/Regroupement Adultes Non ACC.R")
 
 #Export en CSV
 write.csv2(adulteTotal,"C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données retravaillées/Tous les adultes.csv")
@@ -153,4 +165,3 @@ write.csv2(tablePaACC,"C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/
 write.csv2(tableAduNonAcc,"C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données retravaillées/table adulte sans accident.csv")
 write.csv2(tableEnfNonAcc,"C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données retravaillées/table enfant sans accident.csv")
 write.csv2(tablePaNonAcc,"C:/Users/Charles/OneDrive - Université de Poitiers/IRIAF/Études bilatéral/Étude statistique/Données retravaillées/table PA sans accident.csv")
-
