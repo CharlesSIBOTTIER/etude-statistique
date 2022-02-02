@@ -1,0 +1,10 @@
+#Permet de faire le retraitement des "NA"
+source("./Code retraitement NA/Retraitement Tous les Adultes.R")
+source("./Code retraitement NA/Retraitement Adulte ACC.R")
+source("./Code retraitement NA/Retraitement Adulte Non ACC.R")
+source("./Code retraitement NA/Retraitement Tous les enfants.R")
+source("./Code retraitement NA/Retraitement Enf ACC.R")
+source("./Code retraitement NA/Retraitement Enf Non ACC.R")
+source("./Code retraitement NA/Retraitement PA ACC.R")
+source("./Code retraitement NA/Retraitement PA Non ACC.R")
+source("./Code retraitement NA/Retraitement Tous les PA.R")
